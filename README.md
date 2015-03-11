@@ -9,4 +9,4 @@ add that specific file to Cron Job.
 
 More documentation coming soon ....
 
-:smile: EGreen Team :smile:
+:smile: Team EGreen :smile:
