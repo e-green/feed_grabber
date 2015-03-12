@@ -7,6 +7,8 @@ This is a data grabbing tool which can be used to publish posts automatically in
 publishing platform. There's a specific file optimized for Cron Job and you have to just
 add that specific file to Cron Job.
 
+Then you need to do some modifications in your database in order to use this.
+
 More documentation coming soon ....
 
 :smile: Team EGreen :smile:
