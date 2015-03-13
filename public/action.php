@@ -8,7 +8,7 @@ $_SESSION["username"] = $username;
 $_SESSION["password"] = $password;
 
 if ($username == "admin" && $password == 1234) {
-	header("Location: dash.php");
+	header("Location: AddStudent.php");
 }else{
 	echo "Incorrect Username or Password";
 }

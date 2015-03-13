@@ -1,6 +1,6 @@
 <?php 
 
-define("DB_HOST", "localhost");
+define("DB_HOST", "107.170.117.168");
 define("DB_USER", "cloudnews");
 define("DB_PASS", "6uze8uqab");
 define("DB_NAME", "zadmin_newspanikaju");

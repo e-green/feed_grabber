@@ -45,20 +45,12 @@ function saveSiteData($site,$title,$link){
 }
 
 // Adding data to Panikaju Panikaju Panikaju Panikaju Panikaju Panikaju Panikaju Panikaju Panikaju
-function saveSiteData($site,$title,$link){
+function saveSiteDataWeb($title , $content){
 	global $connection;
 
-	$stmt = $connection->prepare("INSERT INTO wp_posts (`ID`, `post_author`,
-	$`post_date`, `post_date_gmt`, `post_content`, `post_title`,
-	$`post_excerpt`, `post_status`, `comment_status`, `ping_status`,
-	$`post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`,
-	$`post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`,
-	$`menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES
-	$(NULL, '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ?, ?, '',
-	$'publish', 'open', 'open', '', '', '', '', '0000-00-00 00:00:00',
-	$'0000-00-00 00:00:00', '', '0', '', '0', 'post', '', '0')");
+	$stmt = $connection->prepare("INSERT INTO wp_posts (ID, post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt, post_status, comment_status, ping_status, post_password, post_name, to_ping, pinged, post_modified, post_modified_gmt, post_content_filtered, post_parent, guid, menu_order, post_type, post_mime_type, comment_count) VALUES (NULL, '1', '2015-03-11 04:55:36', '2015-03-11 04:55:36', ?, ?, '','publish', 'open', 'open', '', '', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0', '', '0', 'post', '', '0')");
 
-	$stmt->bind_param("ss", $title, $title);
+	$stmt->bind_param("ss", $content, $title);
 
 	// set parameters and execute
 	$title = $title;
@@ -143,8 +135,21 @@ function getFeed($feed_url,$content_name,$news_name,$img_url,$video_url) {
         echo "<li><a href='$entry->link' title='$entry->title'>" . $entry->title . "</a></li>";
 
 		SaveSiteData($site_id , $entry->title , $entry->link);
+
+		
     }
     echo "</ul>";
+
+	// Adding real data to server
+	$content = file_get_contents($feed_url);
+	    $x = new SimpleXmlElement($content);
+
+	    foreach($x->channel->item as $entry) {
+	       
+			saveSiteDataWeb($entry->title , $entry->description);
+
+	    }
+		// End of adding data
 }
 
 function getFeed_for_view($url){
@@ -154,6 +159,9 @@ function getFeed_for_view($url){
 
     foreach($x->channel->item as $entry) {
         echo "<li><a href='$entry->link' title='$entry->title'>" . $entry->title . "</a></li>";
+        echo "<br>";
+        echo "<li>" . $entry->description . "</li>";
     }
 }
+
 ?>
